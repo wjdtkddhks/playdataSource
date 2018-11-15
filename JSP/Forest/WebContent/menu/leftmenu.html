@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">
+<script src="../jquery-3.3.1.js"></script>
+<script>
+	function searchTag(){
+		var search = $('#search1').val();
+		var href1 = window.parent.frames["right"].location.href;
+		var href2 ='';
+		
+		if(search == '줄거리' || search == 'story'){
+				href2 = 'story.html';
+				window.parent.frames["right"].location.href = href2;	
+				clickCheck(href1, href2);
+		}else if(search == '원작' || search == 'story'){
+				href2 = 'original.html';
+				window.parent.frames["right"].location.href = href2;	
+				clickCheck(href1, href2);
+		}else if(search == '감독' || search == 'director' || search == '임순례'){
+				href2 = 'director.html';
+				window.parent.frames["right"].location.href = href2;	
+				clickCheck(href1, href2);
+		}else if(search == '배우' || search == 'actor'){
+				href2 = 'actor.html';
+				window.parent.frames["right"].location.href = href2;	
+				clickCheck(href1, href2);
+		}else if(search == '제작진' || search == 'step'){
+				href2 = 'step.html';
+				window.parent.frames["right"].location.href = href2;	
+				clickCheck(href1, href2);
+		}else if(search == '감상평' || search == '감상'){
+				href2 = 'appreciate.html';
+				window.parent.frames["right"].location.href = href2;	
+				clickCheck(href1, href2);
+		}else if(search == '김태리' || search == 'kim' || search == '여주'){
+				window.parent.frames["right"].location.href = 'kim.html';
+				href2 = 'actor.html';
+				clickCheck(href1, href2);
+		}else if(search == '류준열' || search == 'ryu' || search == '남주'){
+				window.parent.frames["right"].location.href = 'ryu.html';
+				href2 = 'actor.html';
+				clickCheck(href1, href2);
+		}else if(search =='진기주' || search == 'jin'){
+				window.parent.frames["right"].location.href = 'jin.html';
+				href2 = 'actor.html';
+				clickCheck(href1, href2);
+		}else{
+				alert("검색어를 확인해주세요!!!");}
+		
+	}
+	
+	function clickCheck(href1, href2){
+		var a = href1.lastIndexOf('/');
+		href1 = href1.substring(a+1);
+		var b = href1.lastIndexOf('.');
+		href1 = href1.substring(0,b);
+		href1 = "#"+href1;
+		switch(href2){
+		case 'rightmain1.html' :
+			{
+			$(href1).css('color', '#7b8f5e');
+			$('#rightmain1').css('color', 'red');}
+			break;
+		case 'story.html' :
+			{
+			$(href1).css('color', '#7b8f5e');
+			$('#story').css('color', 'red');}
+			break;
+		case 'original.html' :
+			{
+			$(href1).css('color', '#7b8f5e');
+			$('#original').css('color', 'red');}
+			break;
+		case 'director.html' :
+			{
+			$(href1).css('color', '#7b8f5e');
+			$('#director').css('color', 'red');}
+			break;
+		case 'actor.html' :
+			{
+			$(href1).css('color', '#7b8f5e');
+			$('#actor').css('color', 'red');}
+			break;
+		case 'step.html' :
+			{
+			$(href1).css('color', '#7b8f5e');
+			$('#step').css('color', 'red');}
+			break;
+		case 'appreciate.html' :
+			{
+			$(href1).css('color', '#7b8f5e');
+			$('#appreciate').css('color', 'red');}
+			break;
+		}
+	}
+
+	$(document).ready(function(){
+		
+		$('.listbutton').click(function(){
+		var src = $(this).attr('src');
+		
+		if(src == '../image/button_berry.png')
+			$(this).attr('src', '../image/button_melon.png');
+		else
+			$(this).attr('src', '../image/button_berry.png');
+		
+		var id = $(this).closest('div').attr('id');
+		
+		if(id == 'list1'){
+			if(($('#intro_list').css('display')) == 'none' )
+				$('#intro_list').css('display', 'block');
+			else
+				$('#intro_list').css('display', 'none');
+		}
+		else if(id == 'list2')
+			if(($('#actor_step_list').css('display')) == 'none' )
+				$('#actor_step_list').css('display', 'block');
+			else
+				$('#actor_step_list').css('display', 'none');
+		});
+		
+		$('#rightmain1').click(function(){
+			var href1 = window.parent.frames["right"].location.href;
+			var href2 = 'rightmain1.html';
+			window.parent.frames["right"].location.href = href2;
+			clickCheck(href1, href2);
+		});
+		
+		$('#story').click(function(){
+			var href1 = window.parent.frames["right"].location.href;
+			var href2 = 'story.html';
+			window.parent.frames["right"].location.href = href2;
+			clickCheck(href1, href2);
+		});
+		
+		$('#original').click(function(){
+			var href1 = window.parent.frames["right"].location.href;
+			var href2 = 'original.html';
+			window.parent.frames["right"].location.href = href2;
+			clickCheck(href1, href2);
+		});
+		
+		$('#director').click(function(){
+			var href1 = window.parent.frames["right"].location.href;
+			var href2 = 'director.html';
+			window.parent.frames["right"].location.href = href2;
+			clickCheck(href1, href2);
+		});
+		
+		$('#actor').click(function(){
+			var href1 = window.parent.frames["right"].location.href;
+			var href2 = 'actor.html';
+			window.parent.frames["right"].location.href = href2;
+			clickCheck(href1, href2);
+		});
+		
+		$('#step').click(function(){
+			var href1 = window.parent.frames["right"].location.href;
+			var href2 = 'step.html';
+			window.parent.frames["right"].location.href = href2;
+			clickCheck(href1, href2);
+		});
+		
+		$('#appreciate').click(function(){
+			var href1 = window.parent.frames["right"].location.href;
+			var href2 = 'appreciate.html';
+			window.parent.frames["right"].location.href = href2;
+			clickCheck(href1, href2);
+		});
+		
+		$('#search1').keypress(function(event){
+			var keycode = event.keyCode || event.which;
+			if(keycode == 13){
+				searchTag();
+			}
+		});
+		
+		$('#search2').click(function(){
+			searchTag();
+		});
+		
+	});
+</script>
+<style>
+	body{
+		font-family: 'Nanum Pen Script', cursive;
+		font-weight: 800;	
+	}
+	a{
+		text-decoration: none;
+	}
+	div{
+		margin-left: 20px;
+		margin-top: 30px;
+		font-size: 30px;
+	}
+	img{
+		width: 15%;
+		height: 17%;
+		cursor: pointer;
+	}
+	#list2{
+		margin-top: 30px;
+	}
+	span{
+		color: #62738d;
+		cursor: pointer;
+	}
+	ol{
+		list-style: none;
+		color: #7b8f5e;
+		font-size: 22px;
+		display: none;
+	}
+	li{
+		margin: 8px 30px;
+		cursor: pointer;
+		color: #7b8f5e;
+	}
+	#search2{
+		background-color: white;
+		border: none;
+		width: 32px;
+		height: 32px;
+		cursor: pointer;
+		vertical-align: middle;
+	}
+	#button_search{
+		width: 33px;
+		height: 33px;
+		line-height: 30px;
+		margin: 0 auto;
+	}
+</style>
+</head>
+<body>
+	<div id='list1'><img class='listbutton' src='../image/button_berry.png'/>
+	<span id= 'rightmain1'>소개</span></div>
+		<ol id='intro_list'>
+			<li id='story'>줄거리</li>
+			<li id='original'>원 작</li>
+		</ol>
+	<div id='list2' ><img class='listbutton' src='../image/button_berry.png'/>
+	<span id='rightmain2'>출연/스텝</span></div>
+		<ol id='actor_step_list'>
+			<li id='director'>감 독</li>
+			<li id='actor' onmouseover = 'mouseShape(this);'>배 우</li>
+			<li id='step' onmouseover = 'mouseShape(this);'>제작진</li>
+		</ol>
+	<div id='list3' ><img class='listbutton' src='../image/button_berry.png'/>
+	<span id='appreciate'>감 상 평</span></div>
+<br/>
+<br/>
+<form>
+<input type="search" id='search1' size='20' /> <button id='search2' >
+<img id='button_search' src='../image/button_search.png' /></button>
+</form>
+</body>
+</html>

@@ -1,0 +1,359 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>8.1. datetime — Basic date and time types &#8212; Python 3.5.6 documentation</title>
+    <link rel="stylesheet" href="../_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within Python 3.5.6 documentation"
+          href="../_static/opensearch.xml"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="8.2. calendar — General calendar-related functions" href="calendar.html" />
+    <link rel="prev" title="8. Data Types" href="datatypes.html" />
+    <link rel="shortcut icon" type="image/png" href="../_static/py.png" />
+    <link rel="canonical" href="https://docs.python.org/3/library/datetime.html" />
+    
+    <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    
+    
+ 
+
+  </head><body>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="calendar.html" title="8.2. calendar — General calendar-related functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="datatypes.html" title="8. Data Types"
+             accesskey="P">previous</a> |</li>
+        <li><img src="../_static/py.png" alt=""
+                 style="vertical-align: middle; margin-top: -1px"/></li>
+        <li><a href="https://www.python.org/">Python</a> &#187;</li>
+        <li>
+          <a href="../index.html">3.5.6 Documentation</a> &#187;
+        </li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >The Python Standard Library</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="datatypes.html" accesskey="U">8. Data Types</a> &#187;</li>
+    <li class="right">
+        
+
+    <div class="inline-search" style="display: none" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="Quick search" type="text" name="q" />
+          <input type="submit" value="Go" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+    <script type="text/javascript">$('.inline-search').show(0);</script>
+         |
+    </li>
+
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-datetime">
+<span id="datetime-basic-date-and-time-types"></span><h1>8.1. <a class="reference internal" href="#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> — Basic date and time types<a class="headerlink" href="#module-datetime" title="Permalink to this headline">¶</a></h1>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/3.5/Lib/datetime.py">Lib/datetime.py</a></p>
+<hr class="docutils" />
+<p>The <a class="reference internal" href="#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> module supplies classes for manipulating dates and times in
+both simple and complex ways.  While date and time arithmetic is supported, the
+focus of the implementation is on efficient attribute extraction for output
+formatting and manipulation. For related functionality, see also the
+<a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a> and <a class="reference internal" href="calendar.html#module-calendar" title="calendar: Functions for working with calendars, including some emulation of the Unix cal program."><code class="xref py py-mod docutils literal notranslate"><span class="pre">calendar</span></code></a> modules.</p>
+<p>There are two kinds of date and time objects: “naive” and “aware”.</p>
+<p>An aware object has sufficient knowledge of applicable algorithmic and
+political time adjustments, such as time zone and daylight saving time
+information, to locate itself relative to other aware objects.  An aware object
+is used to represent a specific moment in time that is not open to
+interpretation <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</p>
+<p>A naive object does not contain enough information to unambiguously locate
+itself relative to other date/time objects.  Whether a naive object represents
+Coordinated Universal Time (UTC), local time, or time in some other timezone is
+purely up to the program, just like it is up to the program whether a
+particular number represents metres, miles, or mass.  Naive objects are easy to
+understand and to work with, at the cost of ignoring some aspects of reality.</p>
+<p>For applications requiring aware objects, <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> and <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a>
+objects have an optional time zone information attribute, <code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code>, that
+can be set to an instance of a subclass of the abstract <a class="reference internal" href="#datetime.tzinfo" title="datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a> class.
+These <a class="reference internal" href="#datetime.tzinfo" title="datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a> objects capture information about the offset from UTC
+time, the time zone name, and whether Daylight Saving Time is in effect.  Note
+that only one concrete <a class="reference internal" href="#datetime.tzinfo" title="datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a> class, the <a class="reference internal" href="#datetime.timezone" title="datetime.timezone"><code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code></a> class, is
+supplied by the <a class="reference internal" href="#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> module.  The <a class="reference internal" href="#datetime.timezone" title="datetime.timezone"><code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code></a> class can
+represent simple timezones with fixed offset from UTC, such as UTC itself or
+North American EST and EDT timezones.  Supporting timezones at deeper levels of
+detail is up to the application.  The rules for time adjustment across the
+world are more political than rational, change frequently, and there is no
+standard suitable for every application aside from UTC.</p>
+<p>The <a class="reference internal" href="#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> module exports the following constants:</p>
+<dl class="data">
+<dt id="datetime.MINYEAR">
+<code class="descclassname">datetime.</code><code class="descname">MINYEAR</code><a class="headerlink" href="#datetime.MINYEAR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The smallest year number allowed in a <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> or <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object.
+<a class="reference internal" href="#datetime.MINYEAR" title="datetime.MINYEAR"><code class="xref py py-const docutils literal notranslate"><span class="pre">MINYEAR</span></code></a> is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="datetime.MAXYEAR">
+<code class="descclassname">datetime.</code><code class="descname">MAXYEAR</code><a class="headerlink" href="#datetime.MAXYEAR" title="Permalink to this definition">¶</a></dt>
+<dd><p>The largest year number allowed in a <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> or <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object.
+<a class="reference internal" href="#datetime.MAXYEAR" title="datetime.MAXYEAR"><code class="xref py py-const docutils literal notranslate"><span class="pre">MAXYEAR</span></code></a> is <code class="docutils literal notranslate"><span class="pre">9999</span></code>.</p>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt>Module <a class="reference internal" href="calendar.html#module-calendar" title="calendar: Functions for working with calendars, including some emulation of the Unix cal program."><code class="xref py py-mod docutils literal notranslate"><span class="pre">calendar</span></code></a></dt>
+<dd>General calendar related functions.</dd>
+<dt>Module <a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a></dt>
+<dd>Time access and conversions.</dd>
+</dl>
+</div>
+<div class="section" id="available-types">
+<h2>8.1.1. Available Types<a class="headerlink" href="#available-types" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">datetime.</code><code class="descname">date</code></dt>
+<dd><p>An idealized naive date, assuming the current Gregorian calendar always was, and
+always will be, in effect. Attributes: <a class="reference internal" href="#datetime.date.year" title="datetime.date.year"><code class="xref py py-attr docutils literal notranslate"><span class="pre">year</span></code></a>, <a class="reference internal" href="#datetime.date.month" title="datetime.date.month"><code class="xref py py-attr docutils literal notranslate"><span class="pre">month</span></code></a>, and
+<a class="reference internal" href="#datetime.date.day" title="datetime.date.day"><code class="xref py py-attr docutils literal notranslate"><span class="pre">day</span></code></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">datetime.</code><code class="descname">time</code></dt>
+<dd><p>An idealized time, independent of any particular day, assuming that every day
+has exactly 24*60*60 seconds (there is no notion of “leap seconds” here).
+Attributes: <a class="reference internal" href="#datetime.time.hour" title="datetime.time.hour"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hour</span></code></a>, <a class="reference internal" href="#datetime.time.minute" title="datetime.time.minute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">minute</span></code></a>, <a class="reference internal" href="#datetime.time.second" title="datetime.time.second"><code class="xref py py-attr docutils literal notranslate"><span class="pre">second</span></code></a>, <a class="reference internal" href="#datetime.time.microsecond" title="datetime.time.microsecond"><code class="xref py py-attr docutils literal notranslate"><span class="pre">microsecond</span></code></a>,
+and <a class="reference internal" href="#datetime.time.tzinfo" title="datetime.time.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">datetime.</code><code class="descname">datetime</code></dt>
+<dd><p>A combination of a date and a time. Attributes: <a class="reference internal" href="#datetime.datetime.year" title="datetime.datetime.year"><code class="xref py py-attr docutils literal notranslate"><span class="pre">year</span></code></a>, <a class="reference internal" href="#datetime.datetime.month" title="datetime.datetime.month"><code class="xref py py-attr docutils literal notranslate"><span class="pre">month</span></code></a>,
+<a class="reference internal" href="#datetime.datetime.day" title="datetime.datetime.day"><code class="xref py py-attr docutils literal notranslate"><span class="pre">day</span></code></a>, <a class="reference internal" href="#datetime.datetime.hour" title="datetime.datetime.hour"><code class="xref py py-attr docutils literal notranslate"><span class="pre">hour</span></code></a>, <a class="reference internal" href="#datetime.datetime.minute" title="datetime.datetime.minute"><code class="xref py py-attr docutils literal notranslate"><span class="pre">minute</span></code></a>, <a class="reference internal" href="#datetime.datetime.second" title="datetime.datetime.second"><code class="xref py py-attr docutils literal notranslate"><span class="pre">second</span></code></a>, <a class="reference internal" href="#datetime.datetime.microsecond" title="datetime.datetime.microsecond"><code class="xref py py-attr docutils literal notranslate"><span class="pre">microsecond</span></code></a>,
+and <a class="reference internal" href="#datetime.datetime.tzinfo" title="datetime.datetime.tzinfo"><code class="xref py py-attr docutils literal notranslate"><span class="pre">tzinfo</span></code></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">datetime.</code><code class="descname">timedelta</code></dt>
+<dd><p>A duration expressing the difference between two <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a>, <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a>,
+or <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> instances to microsecond resolution.</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">datetime.</code><code class="descname">tzinfo</code></dt>
+<dd><p>An abstract base class for time zone information objects.  These are used by the
+<a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> and <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> classes to provide a customizable notion of
+time adjustment (for example, to account for time zone and/or daylight saving
+time).</p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">datetime.</code><code class="descname">timezone</code></dt>
+<dd><p>A class that implements the <a class="reference internal" href="#datetime.tzinfo" title="datetime.tzinfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">tzinfo</span></code></a> abstract base class as a
+fixed offset from the UTC.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 3.2.</span></p>
+</div>
+</dd></dl>
+
+<p>Objects of these types are immutable.</p>
+<p>Objects of the <a class="reference internal" href="#datetime.date" title="datetime.date"><code class="xref py py-class docutils literal notranslate"><span class="pre">date</span></code></a> type are always naive.</p>
+<p>An object of type <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> or <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> may be naive or aware.
+A <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> object <em>d</em> is aware if <code class="docutils literal notranslate"><span class="pre">d.tzinfo</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code> and
+<code class="docutils literal notranslate"><span class="pre">d.tzinfo.utcoffset(d)</span></code> does not return <code class="docutils literal notranslate"><span class="pre">None</span></code>.  If <code class="docutils literal notranslate"><span class="pre">d.tzinfo</span></code> is
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, or if <code class="docutils literal notranslate"><span class="pre">d.tzinfo</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code> but <code class="docutils literal notranslate"><span class="pre">d.tzinfo.utcoffset(d)</span></code>
+returns <code class="docutils literal notranslate"><span class="pre">None</span></code>, <em>d</em> is naive.  A <a class="reference internal" href="#datetime.time" title="datetime.time"><code class="xref py py-class docutils literal notranslate"><span class="pre">time</span></code></a> object <em>t</em> is aware
+if <code class="docutils literal notranslate"><span class="pre">t.tzinfo</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">t.tzinfo.utcoffset(None)</span></code> does not return
+<code class="docutils literal notranslate"><span class="pre">None</span></code>.  Otherwise, <em>t</em> is naive.</p>
+<p>The distinction between naive and aware doesn’t apply to <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a>
+objects.</p>
+<p>Subclass relationships:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nb">object</span>
+    <span class="n">timedelta</span>
+    <span class="n">tzinfo</span>
+        <span class="n">timezone</span>
+    <span class="n">time</span>
+    <span class="n">date</span>
+        <span class="n">datetime</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="timedelta-objects">
+<span id="datetime-timedelta"></span><h2>8.1.2. <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> Objects<a class="headerlink" href="#timedelta-objects" title="Permalink to this headline">¶</a></h2>
+<p>A <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> object represents a duration, the difference between two
+dates or times.</p>
+<dl class="class">
+<dt id="datetime.timedelta">
+<em class="property">class </em><code class="descclassname">datetime.</code><code class="descname">timedelta</code><span class="sig-paren">(</span><em>days=0</em>, <em>seconds=0</em>, <em>microseconds=0</em>, <em>milliseconds=0</em>, <em>minutes=0</em>, <em>hours=0</em>, <em>weeks=0</em><span class="sig-paren">)</span><a class="headerlink" href="#datetime.timedelta" title="Permalink to this definition">¶</a></dt>
+<dd><p>All arguments are optional and default to <code class="docutils literal notranslate"><span class="pre">0</span></code>.  Arguments may be integers
+or floats, and may be positive or negative.</p>
+<p>Only <em>days</em>, <em>seconds</em> and <em>microseconds</em> are stored internally.  Arguments are
+converted to those units:</p>
+<ul class="simple">
+<li>A millisecond is converted to 1000 microseconds.</li>
+<li>A minute is converted to 60 seconds.</li>
+<li>An hour is converted to 3600 seconds.</li>
+<li>A week is converted to 7 days.</li>
+</ul>
+<p>and days, seconds and microseconds are then normalized so that the
+representation is unique, with</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">microseconds</span> <span class="pre">&lt;</span> <span class="pre">1000000</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">seconds</span> <span class="pre">&lt;</span> <span class="pre">3600*24</span></code> (the number of seconds in one day)</li>
+<li><code class="docutils literal notranslate"><span class="pre">-999999999</span> <span class="pre">&lt;=</span> <span class="pre">days</span> <span class="pre">&lt;=</span> <span class="pre">999999999</span></code></li>
+</ul>
+<p>If any argument is a float and there are fractional microseconds,
+the fractional microseconds left over from all arguments are
+combined and their sum is rounded to the nearest microsecond using
+round-half-to-even tiebreaker.  If no argument is a float, the
+conversion and normalization processes are exact (no information is
+lost).</p>
+<p>If the normalized value of days lies outside the indicated range,
+<a class="reference internal" href="exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> is raised.</p>
+<p>Note that normalization of negative values may be surprising at first. For
+example,</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">timedelta</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">days</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">seconds</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">microseconds</span><span class="p">)</span>
+<span class="go">(-1, 86399, 999999)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Class attributes are:</p>
+<dl class="attribute">
+<dt id="datetime.timedelta.min">
+<code class="descclassname">timedelta.</code><code class="descname">min</code><a class="headerlink" href="#datetime.timedelta.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>The most negative <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> object, <code class="docutils literal notranslate"><span class="pre">timedelta(-999999999)</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="datetime.timedelta.max">
+<code class="descclassname">timedelta.</code><code class="descname">max</code><a class="headerlink" href="#datetime.timedelta.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>The most positive <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> object, <code class="docutils literal notranslate"><span class="pre">timedelta(days=999999999,</span>
+<span class="pre">hours=23,</span> <span class="pre">minutes=59,</span> <span class="pre">seconds=59,</span> <span class="pre">microseconds=999999)</span></code>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="datetime.timedelta.resolution">
+<code class="descclassname">timedelta.</code><code class="descname">resolution</code><a class="headerlink" href="#datetime.timedelta.resolution" title="Permalink to this definition">¶</a></dt>
+<dd><p>The smallest possible difference between non-equal <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> objects,
+<code class="docutils literal notranslate"><span class="pre">timedelta(microseconds=1)</span></code>.</p>
+</dd></dl>
+
+<p>Note that, because of normalization, <code class="docutils literal notranslate"><span class="pre">timedelta.max</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">-timedelta.min</span></code>.
+<code class="docutils literal notranslate"><span class="pre">-timedelta.max</span></code> is not representable as a <a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> object.</p>
+<p>Instance attributes (read-only):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Attribute</th>
+<th class="head">Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">days</span></code></td>
+<td>Between -999999999 and 999999999 inclusive</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">seconds</span></code></td>
+<td>Between 0 and 86399 inclusive</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">microseconds</span></code></td>
+<td>Between 0 and 999999 inclusive</td>
+</tr>
+</tbody>
+</table>
+<p>Supported operations:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="59%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operation</th>
+<th class="head">Result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">+</span> <span class="pre">t3</span></code></td>
+<td>Sum of <em>t2</em> and <em>t3</em>. Afterwards <em>t1</em>-<em>t2</em> ==
+<em>t3</em> and <em>t1</em>-<em>t3</em> == <em>t2</em> are true. (1)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">-</span> <span class="pre">t3</span></code></td>
+<td>Difference of <em>t2</em> and <em>t3</em>. Afterwards <em>t1</em>
+== <em>t2</em> - <em>t3</em> and <em>t2</em> == <em>t1</em> + <em>t3</em> are
+true. (1)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">*</span> <span class="pre">i</span> <span class="pre">or</span> <span class="pre">t1</span> <span class="pre">=</span> <span class="pre">i</span> <span class="pre">*</span> <span class="pre">t2</span></code></td>
+<td>Delta multiplied by an integer.
+Afterwards <em>t1</em> // i == <em>t2</em> is true,
+provided <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">!=</span> <span class="pre">0</span></code>.</td>
+</tr>
+<tr class="row-odd"><td>&#160;</td>
+<td>In general, <em>t1</em> * i == <em>t1</em> * (i-1) + <em>t1</em>
+is true. (1)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">*</span> <span class="pre">f</span> <span class="pre">or</span> <span class="pre">t1</span> <span class="pre">=</span> <span class="pre">f</span> <span class="pre">*</span> <span class="pre">t2</span></code></td>
+<td>Delta multiplied by a float. The result is
+rounded to the nearest multiple of
+timedelta.resolution using round-half-to-even.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">/</span> <span class="pre">t3</span></code></td>
+<td>Division (3) of <em>t2</em> by <em>t3</em>.  Returns a
+<a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> object.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">/</span> <span class="pre">f</span> <span class="pre">or</span> <span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">/</span> <span class="pre">i</span></code></td>
+<td>Delta divided by a float or an int. The result
+is rounded to the nearest multiple of
+timedelta.resolution using round-half-to-even.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">//</span> <span class="pre">i</span></code> or
+<code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">//</span> <span class="pre">t3</span></code></td>
+<td>The floor is computed and the remainder (if
+any) is thrown away.  In the second case, an
+integer is returned. (3)</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">t1</span> <span class="pre">=</span> <span class="pre">t2</span> <span class="pre">%</span> <span class="pre">t3</span></code></td>
+<td>The remainder is computed as a
+<a class="reference internal" href="#datetime.timedelta" title="datetime.timedelta"><code class="xref py py-class docutils literal notranslate"><span class="pre">timedelta</span></code></a> object. (3)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">q,</span> <span class="pre">r</span> <span class="pre">=</span> <span class="pre">divmod(t1,</span> <span class="pre">t2)</span></code></td>
+<td>Computes the quotient and the remainder:
+<code class="docutils literal notranslate"><span c

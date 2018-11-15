@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="com.spring.naonnaTest.matching.MatchingMapper">
+
+   <resultMap type="MatchingVO" id="matchingResultMap">
+      <result property="matchingID" column="MATCHINGID"/>
+      <result property="homeTeam" column="HOMETEAM"/>
+      <result property="awayTeam" column="awayTeam"/>
+      <result property="groundName" column="groundName"/>
+      <result property="matchLocation" column="match_location"/>
+      <result property="playDate" column="play_date"/>
+      <result property="people" column="people"/>
+      <result property="matFin" column="matFin"/>
+   </resultMap>
+   
+   <resultMap type="PlayerVO" id="playerResultMap">
+      <result property="matchingID" column="MATCHINGID"/>
+      <result property="nickname" column="nickname"/>
+      <result property="people" column="people"/>
+   </resultMap>
+   
+ 	<!--  id는 Mapper.java(여기서 PeopleMapper.java)에 동일하게 사용해야된다.  -->  
+   <select id ="getMatchingList" resultMap="matchingResultMap">
+      select * from matching where play_date > sysdate order by play_date
+   </select>
+   
+   <select id ="printPlayers" resultMap="playerResultMap">
+      select * from player where matchingID = #{matchingID}
+   </select>
+   
+   <select id ="searchMatchingList" resultMap="matchingResultMap">
+      select * from matching 
+      where match_Location = #{matchLocation, javaType=String}
+<!--       where play_date > #{playDate, javaType=Date} 	AND match_Location = #{matchLocation, javaType=String} -->
+<!--       <if test = "matchLocation != ''"> -->
+<!--       	AND match_Location = #{matchLocation, javaType=String} -->
+<!--       </if> -->
+      order by play_date
+   </select>
+   
+   <insert id="insertMatching" parameterType="com.spring.naonnaTest.matching.MatchingVO">
+   		insert into matching (matchingid, hometeam, play_date, match_Location, people) values ( #{matchingID}, #{homeTeam}, #{playDate}, #{matchLocation}, #{people} )
+   </insert>
+   
+    <insert id="addPlayer" parameterType="com.spring.naonnaTest.matching.PlayerVO">
+   		insert into player values ( #{nickname}, #{matchingID}, #{people} )
+   </insert>
+   
+   <select id ="detailMatching" parameterType="String" resultMap="matchingResultMap">
+      select * from matching where matchingID = #{matchingID, javaType=String}
+   </select>
+   
+   <update id = "matchFin" parameterType="String">
+   		update matching set matFin = 1 where matchingID = #{matchingID, javaType=String}
+   </update>
+   
+   <update id = "confirmMatchMessage" parameterType="com.spring.naonnaTest.matching.PlayerVO">
+   		update message set confirm = 1 where matchingID = #{matchingID, javaType=String}
+   </update>
+   
+   <delete id="delMatch" parameterType="String">
+      delete from matching where matchingID = #{matchingID}
+   </delete>
+
+</mapper>

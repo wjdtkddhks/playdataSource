@@ -1,0 +1,22 @@
+@charset "EUC-KR";
+
+	body{
+		font-family: 'Nanum Pen Script', cursive;
+		padding: 30px 200px 0px 50px;
+	}
+	header{
+	border-left: 5px solid #87985c;
+	border-bottom: 3px solid gray;
+	padding-left: 20px;
+	padding-top: 15px;
+	margin-bottom: 20px;
+	}
+	header div:nth-child(1){
+		font-size: 40px;
+		font-weight: 800;
+		margin-bottom: 10px;
+	}
+	header div:nth-child(2){
+		font-size: 25px;
+		margin-bottom: 20px;
+	}

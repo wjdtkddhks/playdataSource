@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}register_success.html{% endblock %}
+
+{% block content %}
+<div id="cotent">
+    <h1>Registration Completed Successfully</h1>
+
+    <p>Thank you for registering.</p>
+    <p><a href="{% url 'login' %}">Login again</a></p>
+</div>
+{% endblock %}

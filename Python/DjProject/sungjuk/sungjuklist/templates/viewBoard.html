@@ -1,0 +1,72 @@
+<script language="JavaScript">
+    function goList(){
+        if({{current_page}} == null){
+            location.href= "/listPage?current_page=1";
+        }else{
+            location.href="/listPage?current_page={{current_page}}";
+        }
+    }
+
+    function updateForm(){
+        location.href = "/updateForm?current_page={{current_page}}&hakbun={{sungjuk.hakbun}}"
+    }
+
+    function deleteSungjuk(){
+        location.href = "/deleteSungjuk?current_page={{current_page}}&hakbun={{sungjuk.hakbun}}"
+    }
+</script>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>성적 입력</title>
+    <style>
+        table{
+            margin: auto;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <table width="200" border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>학번</th>
+                <td>{{sungjuk.hakbun}}</td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td>{{sungjuk.name}}</td>
+            </tr>
+            <tr>
+                <th>국어</th>
+                <td>{{sungjuk.kor}}</td>
+            </tr>
+            <tr>
+                <th>영어</th>
+                <td>{{sungjuk.eng}}</td>
+            </tr>
+            <tr>
+                <th>수학</th>
+                <td>{{sungjuk.math}}</td>
+            </tr>
+            <tr>
+                <th>합계</th>
+                <td>{{sungjuk.sum}}</td>
+            </tr>
+            <tr>
+                <th>평균</th>
+                <td>{{sungjuk.avg}}</td>
+            </tr>
+            <tr>
+                <th>등급</th>
+                <td>{{sungjuk.grade}}</td>
+            </tr>
+    </table>
+    <table width="200" border="1" cellspacing="0" cellpadding="0">
+        <tr>
+            <td><input type="submit" value="수정" onclick="javascript:updateForm();" /></td>
+            <td><input type="submit" value="삭제" onclick="javascript:deleteSungjuk();" /></td>
+            <td><input type="submit" value="목록" onclick="javascript:goList();" /></td>
+        </tr>
+    </table>
+</body>
+</html>

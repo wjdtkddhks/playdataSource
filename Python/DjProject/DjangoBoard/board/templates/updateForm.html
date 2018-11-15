@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>글보기</title>
+</head>
+<script>
+    function writeCheck(){
+        var form = document.modifyform;
+
+        if(!form.subject.value){
+            alert('제목을 적어주세요');
+            form.subject.focus();
+            return;
+        }
+
+        if(!form.memo.value){
+            alert('내용을 적어주세요');
+            form.memo.focus();
+            return;
+        }
+
+       form.submit();
+    }
+
+    function boardList(){
+        var s = "{{searchStr}}"
+
+        if(s == "None")
+            location.href = "/listPage?current_page={{current_page}}";
+        else
+            location.href = "/listSearchPage?pageForView={{current_page}}&searchStr={{searchStr}}"
+    }
+</script>
+<body>
+    <table cellpadding="5" cellspacing="0" border="1" width="500">
+        <form name="modifyform" action="/updateBoard/" method="post"> {% csrf_token %}
+            <input type="hidden" name="memo_id" value="{{memo_id}}" />
+            <input type="hidden" name="current_page" value="{{current_page}}" />
+            <input type="hidden" name="searchStr" value="{{searchStr}}"/>
+        <tr>
+            <td><b>조회수</b></td>
+            <td>{{boardData.hits}}</td>
+        </tr>
+        <tr>
+            <td><b>이름</b></td>
+            <td>{{boardData.name}}</td>
+        </tr>
+        <tr>
+            <td><b>이메일</b></td>
+            <td><input type="text"size="50" maxlength="50"  name="email" value="{{boardData.email}}" /></td>
+        </tr>
+        <tr>
+            <td><b>제목</b></td>
+            <td><input type="text" size="50" maxlength="50" name="subject" value="{{boardData.subject}}"></td>
+        </tr>
+        <tr>
+            <td><b>내용</b></td>
+            <td><textarea name="memo" cols="50" rows="10">{{boardData.memo}}</textarea></td>
+        </tr>
+        </form>
+    </table>
+    <table cellpadding="0" cellspacing="0" border="0" width="500">
+        <tr><td>
+            <input type="submit" value="수정" onclick="javascript:writeCheck();" />
+            <input type="button" value="목록" onclick="javascript:boardList();" />
+        </td></tr>
+    </table>
+</body>
+</html>

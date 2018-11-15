@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../BookEX/.idea/BookEX.iml" filepath="$PROJECT_DIR$/../BookEX/.idea/BookEX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../CrolingTw/.idea/CrolingTw.iml" filepath="$PROJECT_DIR$/../CrolingTw/.idea/CrolingTw.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TestPy.iml" filepath="$PROJECT_DIR$/.idea/TestPy.iml" />
+    </modules>
+  </component>
+</project>

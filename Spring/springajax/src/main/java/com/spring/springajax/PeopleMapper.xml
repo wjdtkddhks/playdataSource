@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.spring.springajax.PeopleMapper">
+
+	<resultMap type="PeopleVO" id="peopleResultMap">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="job" column="job" />
+		<result property="address" column="address" />
+		<result property="bloodtype" column="bloodtype" />
+	</resultMap>
+	
+	<!-- id는 Mapper.java(여기선 MemberMapper.java)에 동일하게 사용해야된다. -->
+	
+	<select id="getPeopleList" resultMap="peopleResultMap">
+		select * from people order by id
+	</select>
+
+	<!-- parameterType에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래스명이나 별칭이 들어간다 -->
+	
+	<insert id="insertPeople" parameterType="com.spring.springajax.PeopleVO">
+		insert into people values(#{id, javaType=String}, #{name, jdbcType=VARCHAR}, #{job},
+		#{address}, #{bloodtype})
+	</insert>
+	
+	<!-- 
+		<select  id='getPeople' parameterType="String" resultMap="peopleResultMap">
+			select * from people where id= #{id, javaType=String}
+		</select>
+	
+		<update  id='updatePeople' parameterType="com.spring.springajax.PeopleVO">
+			update people set name=#{name}, job=#{job}, address=#{address}, bloodtype=#{bloodtype}
+			where id=#{id}
+		</update>
+		
+		<delete  id='deletePeople' parameterType="String">
+			delete from people where id= #{id}
+		</delete>
+		
+		<select  id='getCount' resultType="int">
+			select count(*) from people
+		</select>
+	 -->
+	 
+</mapper>

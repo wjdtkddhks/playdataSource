@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	
+<mapper namespace="com.spring.springmybatis.MemberMapper">
+
+	<!-- property가 키값이 된다. -->
+	<resultMap type="java.util.HashMap" id="hashmapVO">
+		<result property="id" column="ID" />
+		<result property="name" column="NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+	</resultMap>
+	
+	<resultMap type="MemberVO" id="memberResultMap">
+		<result property="id" column="ID" />
+		<result property="name" column="NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="phone" column="PHONE" />
+	</resultMap>
+	<!-- id는 MemberMapper.java에 동일하게 사용해야 한다 -->
+	
+	<!-- 
+		<select id="getMembers" resultType="hashmap" >
+			SELECT * FROM tab_mybatis order by name
+		</select>
+	 -->
+	
+	<select id="getMembers" resultMap="memberResultMap" >
+		SELECT * FROM tab_mybatis order by id
+	</select>
+
+	<!--  
+	<select id="getMembers" parameterType="String" resultMap="memberResultMap" >
+		SELECT * FROM ${value} order by name
+	</select>
+		-->
+	
+	<select id="getMember" parameterType="String" resultMap="hashmapVO" >
+		SELECT * FROM tab_mybatis WHERE id=#{id, javaType=String}
+	</select>
+	
+	<!--  
+	<select id="getMember" parameterType="String" resultMap="memberResultMap" >
+		SELECT * FROM tab_mybatis WHERE id=#{id, javaType=String}
+	</select>
+	-->
+	<!-- parameterType에는 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래스명이나 별칭이 들어간다 -->
+	
+	<insert id="insertMember" parameterType="com.spring.springmybatis.MemberVO">
+		INSERT INTO tab_mybatis VALUES
+				(#{id, javaType=String}, #{name, jdbcType=VARCHAR}, #{email}, #{phone})
+	</insert>
+	
+	<insert id="insertMember2" parameterType="hashmap">
+		INSERT INTO tab_mybatis VALUES
+				(#{id, javaType=String}, #{name, jdbcType=VARCHAR}, #{email}, #{phone})
+	</insert>
+	
+	<!-- 
+	<insert id="insertMember" parameterType="com.spring.springmybatis.MemberVO">
+		INSERT INTO ${value} VALUES
+				(#{id, javaType=String}, #{name, jdbcType=VARCHAR}, #{email}, #{phone})
+	</insert>
+ 	-->
+ 	
+ 	<update id="updateMember" parameterType="com.spring.springmybatis.MemberVO">
+		UPDATE tab_mybatis SET
+				name=#{name}, email=#{email}, phone=#{phone} WHERE id=#{id}
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM tab_mybatis WHERE id=#{id}
+	</delete>
+	
+	<select id="getCount" resultType="int">
+		select count(*) FROM tab_mybatis
+	</select>
+	
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.spring.naonnaTest.ground.GroundMapper">
+
+   <resultMap type="GroundVO" id="GroundResultMap">
+      <result property="ground_Name" column="GROUND_NAME"/>
+      <result property="ground_admin" column="GROUND_ADMIN" />
+      <result property="ground_addr" column="GROUND_ADDR"/>
+      <result property="ground_city" column="GROUND_CITY"/>
+      <result property="grass" column="GRASS"/>
+      <result property="shower" column="SHOWER"/>
+      <result property="parking" column="PARKING"/>
+      <result property="light" column="LIGHT"/>
+      <result property="week_morning" column="WEEK_MORNING"/>
+      <result property="week_evening" column="WEEK_EVENING"/>
+      <result property="weekend_morning" column="WEEKEND_MORNING"/>
+      <result property="weekend_evening" column="WEEKEND_EVENING"/>
+      <result property="review" column="REVIEW"/>
+      <result property="rule" column="RULE"/>
+      <result property="ground_people" column="GROUND_PEOPLE"/>
+      <result property="ground_size" column="GROUND_SIZE"/>     
+      <result property="photo1" column="PHOTO1" />
+      <result property="photo2" column="PHOTO2" />
+      <result property="photo3" column="PHOTO3" />
+   </resultMap>
+   
+   <resultMap type="BookingVO" id="BookingResultMap">
+      <result property="groundName" column="GROUND_NAME"/>
+      <result property="bookNumber" column="booknumber"/>
+      <result property="matchingID" column="matchingID"/>
+      <result property="nickname" column="nickname"/>
+      <result property="assign" column="assignment"/>
+      <result property="startTime" column="start_time"/>
+      <result property="endTime" column="end_time"/>
+      <result property="confirm" column="confirm"/>
+   </resultMap>
+   
+ 	<!--  id는 Mapper.java(여기서 GroundMapper.java)에 동일하게 사용해야된다.  -->
+
+   <select id ="getGroundList" resultMap="GroundResultMap">
+      SELECT * FROM ground_soccer order by ground_name
+   </select>
+   
+    <select id ="MapperFromDAO" parameterType = "com.spring.naonnaTest.ground.GroundVO" resultMap="GroundResultMap, BookingResultMap">
+      SELECT * FROM ground_soccer where ground_addr like '%%'
+      <if test = "ground_city != ''">
+      	AND ground_city = #{ground_city, javaType=String}
+      </if>
+      <if test = "grass != ''">
+      	AND grass = #{grass, javaType=String}
+      </if>
+      <if test = "parking != ''">
+      	AND parking = #{parking, javaType=String}
+      </if>
+      <if test = "shower != ''">
+      	AND shower = #{shower, javaType=String}
+      </if>
+      <if test = "light != ''">
+      	AND light = #{light, javaType=String}
+      </if>      
+      order by ground_name
+   </select>
+   
+   <select id ="MapperFromTime" parameterType = "HashMap" resultMap="GroundResultMap">
+      SELECT * 
+      FROM ground_soccer, booking
+      where
+      	ground_soccer.ground_name = booking.ground_name 
+		AND booking.start_time not between #{startTime, javaType=Date} and #{endTime, javaType=Date} 
+		AND booking.end_time not between #{startTime, javaType=Date} and #{endTime, javaType=Date} 
+      <if test = "ground_city != ''">
+      	AND ground_soccer.ground_city = #{ground_city, javaType=String}
+      </if>
+      <if test = "grass != ''">
+      	AND ground_soccer.grass = #{grass, javaType=String}
+      </if>
+      <if test = "parking != ''">
+      	AND ground_soccer.parking = #{parking, javaType=String}
+      </if>
+      <if test = "shower != ''">
+      	AND ground_soccer.shower = #{shower, javaType=String}
+      </if>
+      <if test = "light != ''">
+      	AND ground_soccer.light = #{light, javaType=String}
+      </if>      
+      order by ground_soccer.ground_name
+   </select>
+   
+   <select id ="getThatGroundList" parameterType = "com.spring.naonnaTest.ground.GroundVO" resultMap="GroundResultMap">
+      SELECT * FROM ground_soccer where ground_name = #{ground_name, javaType=String}
+   </select>
+   
+  
+   <insert id ="insertGround" parameterType = "com.spring.naonnaTest.ground.GroundVO" >
+   	insert into ground_soccer values(#{ground_Name}, #{ground_admin}, #{ground_city},#{ground_addr},#{grass},#{shower},#{parking},
+   	#{light},#{week_morning},#{week_evening},#{weekend_morning},#{weekend_evening},#{rule},#{ground_people},#{ground_size},#{photo1},#{photo2},#{photo3})
+   </insert>
+   
+    <insert id ="insertBookingGround" parameterType = "com.spring.naonnaTest.ground.GroundVO" >
+   	insert into booking (ground_name, start_time, end_time) values (#{ground_Name}, sysdate-2, sysdate-1)
+   </insert>
+   
+     
+    <select id ="getAdminGroundList" parameterType = "String" resultMap="GroundResultMap">
+    select * from ground_soccer where ground_admin = #{ground_admin}
+    </select>
+  
+    <select id ="getThatUpdateGroundList" parameterType = "String" resultMap="GroundResultMap">
+    select * from ground_soccer where ground_Name = #{ground_name}
+    </select>
+    
+    <update id="modifyGround" parameterType = "com.spring.naonnaTest.ground.GroundVO">
+     update ground_soccer set ground_size = #{ground_size}, ground_city = #{ground_city}, ground_addr= #{ground_addr}, grass = #{grass}, shower = #{shower}, parking = #{parking},
+   	light = #{light}, week_morning = #{week_morning}, week_evening = #{week_evening},weekend_morning=#{weekend_morning},weekend_evening=#{weekend_evening},
+   	rule=#{rule},ground_people=#{ground_people},photo1=#{photo1},photo2=#{photo2},photo3=#{photo3},ground_admin=#{ground_admin} where ground_Name=#{ground_Name}
+    </update>
+    
+     <insert id="addBooking" parameterType = "com.spring.naonnaTest.ground.BookingVO" >
+     insert into booking (booknumber, ground_name, matchingID, nickname, assignment, start_time, end_time) values ( #{bookNumber}, #{groundName}, #{matchingID}, #{nickname}, #{assign}, #{startTime}, #{endTime} )
+    </insert>
+    
+    <select id="selectBooking" parameterType = "com.spring.naonnaTest.ground.BookingVO" resultMap= "BookingResultMap">
+   		 select * from booking where ground_name = #{groundName}
+    </select>
+    
+    <update id="confirmMat" parameterType = "com.spring.naonnaTest.ground.BookingVO">
+    	update booking set confirm = 1 where ground_name = trim(#{groundName}) and nickname = trim(#{nickname})
+    </update>
+    
+    <insert id="confirmMessage" parameterType = "com.spring.naonnaTest.ground.BookingVO">
+    	insert into message (sendPeople, getPeople, message, ground_Name, message_Date) values (#{bookNumber}, #{nickname}, '대관신청이 완료되었습니다.', #{groundName}, sysdate)
+    </insert>
+    
+    <select id="groundPriceInfo" parameterType="String" resultMap = "GroundResultMap">
+   		select * from ground_soccer where ground_name = trim(#{groundName})
+    </select>
+    
+    
+   <!-- 
+   <insert id ="insertGround2" parameterType = "hashmap" >
+   	insert into ground_soccer values(#{ground_Name, javaType=String}, #{ground_admin jdbcType=VARCHAR2}, #{ground_addr},#{ground_city},#{grass},#{shower},#{parking},
+   	#{light},#{week_morning},#{week_evening},#{weekend_morning},#{weekend_evening},#{review},#{rule},#{ground_people}#{ground_size})
+   </insert>
+    -->
+   <!--  
+     <update id="modifybooking" parameterType = "com.spring.naonnaTest.ground.BookingVO">
+     update booking set bookNumber = #{bookNumber}, matchingID = #{matchingID}, nickname = #{nickname},
+     assign = #{assign}, startTime = #{startTime}, endTime = #{endTime}, confirm =#{confirm} where groundName = #{groundName}
+    </update>
+     -->
+</mapper>

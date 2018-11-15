@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	
+<mapper namespace="com.spring.springchat.MemberMapper">
+	
+	<select id="userCheckMember" parameterType="String" resultType="int" >
+		SELECT count(*) FROM test_member where id = #{id}
+	</select>
+	
+	<insert id="insertMember" parameterType="com.spring.springchat.MemberVO" >
+		insert into test_member values(#{id}, #{password}, #{name})
+	</insert>
+	
+	<select id="pickName" parameterType="String" resultType="String" >
+		SELECT name FROM test_member where id=#{id} 
+	</select>
+	
+</mapper>

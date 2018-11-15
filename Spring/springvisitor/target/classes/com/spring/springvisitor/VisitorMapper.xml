@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	
+<mapper namespace="com.spring.springvisitor.VisitorMapper">
+
+	<insert id="insertVisitor" parameterType="String" >
+		insert into visitor values(visitor_seq.nextval, #{agent}, sysdate)
+	</insert>
+</mapper>	

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    
+<mapper namespace="com.spring.naonnaTest.team.TeamMapper">
+
+   <resultMap type="TeamVO" id="teamResultMap">
+      <result property="team_name" column="TEAM_NAME"/>
+      <result property="nickname" column="NICKNAME"/>
+      <result property="age" column="AGE"/>
+      <result property="emblem" column="EMBLEM"/>
+      <result property="ability" column="ABILITY"/>
+      <result property="intro" column="INTRO"/>
+      <result property="number_team" column="NUMBER_TEAM"/>
+      <result property="area" column="AREA"/>     
+   </resultMap>
+   
+   <resultMap type="TeamMemberVO" id="teamMemberResultMap">
+      <result property="teamName" column="TEAM_NAME"/>
+      <result property="nickname" column="NICKNAME"/>
+      <result property="joinDate" column="join_date"/>     
+   </resultMap>
+   
+ 	<!--  id는 Mapper.java(여기서 PeopleMapper.java)에 동일하게 사용해야된다.  -->
+ 
+ <!--  
+   <select id ="getPeopleList" resultMap="peopleResultMap">
+      SELECT * FROM people order by id
+   </select>
+-->
+
+	<select id ="getTeamlist" resultMap="teamResultMap">
+      SELECT * FROM Team order by team_name
+   </select>
+   
+   <select id ="findTeam" parameterType="com.spring.naonnaTest.team.TeamVO" resultMap="teamResultMap">
+      SELECT * FROM Team where team_name like '%%'
+      <if test = "team_name != ''">
+      	AND team_name = #{team_name, javaType=String}
+      </if>
+      <if test = "area != ''">
+      	AND area = #{area, javaType=String}
+      </if>
+      <if test = "nickname != ''">
+      	AND nickname = #{nickname, javaType=String}
+      </if>     
+      order by team_name
+   
+   </select>
+   
+   <select id="getThatTeamInfo" parameterType="com.spring.naonnaTest.team.TeamVO" resultMap="teamResultMap">
+      SELECT * FROM team where team_name = #{team_name,javaType=String}
+   </select>
+   
+   
+   
+   <insert id="addTeam" parameterType="com.spring.naonnaTest.team.TeamVO" >
+   	insert into team values (#{team_name},#{nickname},#{age},#{emblem},#{ability},#{intro},#{number_team},#{area})
+   </insert>
+   
+   <insert id="insertTeamMember" parameterType="com.spring.naonnaTest.team.TeamVO">
+   		insert into team_member (team_name, nickname, join_date) values ( #{team_name}, #{nickname}, sysdate )
+   </insert>
+  
+   <update id ="insertCap" parameterType="com.spring.naonnaTest.team.TeamVO">
+      update user_info set cap = 1, team_name = #{team_name} where nickname = #{nickname}
+   </update>
+   
+   <update id ="plusTeamPeople" parameterType="com.spring.naonnaTest.team.TeamVO">
+      update team set number_team = number_team + 1 where team_name=#{team_name}
+   </update>
+   
+    <update id ="joinConfirm" parameterType="com.spring.naonnaTest.team.TeamVO" >
+      update message set confirm = 1 where team_name=#{team_name} and sendPeople = #{nickname}
+   </update>
+ 
+    <select id="atMatchDetail" parameterType="String" resultMap="teamResultMap">
+      SELECT * FROM team where team_name = #{team_name, javaType=String}
+   </select>
+   
+   <select id="printTeamMember" parameterType="String" resultMap="teamMemberResultMap">
+      SELECT * FROM team_member where team_name = #{team_name, javaType=String} order by join_date
+   </select>
+   
+   <update id="updateTeamName" parameterType="hashmap">
+      update user_info set team_name=#{team_name} where nickname=#{nickname}
+   </update>
+   
+   <delete id="teamdelete" parameterType="String" >
+     delete from team where nickname=#{nickname}
+   </delete>
+   
+   <update id="catNumZero" parameterType="String">
+     update user_info set cap = 0 where nickname=#{nickname}
+   </update>
+   
+   <delete id="matchingdel" parameterType="String">
+     delete from matching where hometeam = #{hometeam}
+   </delete>
+
+</mapper>

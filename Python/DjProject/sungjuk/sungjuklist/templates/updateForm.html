@@ -1,0 +1,79 @@
+<script language="JavaScript">
+    function writeCheck(){
+        var form = document.updateForm;
+
+        if(!form.kor.value){
+            alert('국어점수를 적어주세요');
+            form.kor.focus();
+            return;
+        }
+
+        if(!form.eng.value){
+            alert('영어점수를 적어주세요');
+            form.eng.focus();
+            return;
+        }
+
+        if(!form.math.value){
+            alert('수학점수를 적어주세요');
+            form.math.focus();
+            return;
+        }
+
+       form.submit();
+    }
+
+    function goList(){
+        if({{current_page}} == null){
+            location.href= "/listPage?current_page=1";
+        }else{
+            location.href="/listPage?current_page={{current_page}}";
+        }
+    }
+</script>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>성적 입력</title>
+    <style>
+        table{
+            margin: auto;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <table width="200" border="1" cellspacing="0" cellpadding="0">
+        <form name="updateForm" action="/updateSungjuk/" method="post">
+            <input type="hidden" name="hakbun" value="{{sungjuk.hakbun}}" />
+            <input type="hidden" name="current_page" value="{{current_page}}" />
+            <tr>
+                <th>학번</th>
+                <td>{{sungjuk.hakbun}}</td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td>{{sungjuk.name}}</td>
+            </tr>
+            <tr>
+                <th>국어</th>
+                <td><input type="text" name="kor" value="{{sungjuk.kor}}" /></td>
+            </tr>
+            <tr>
+                <th>영어</th>
+                <td><input type="text" name="eng" value="{{sungjuk.eng}}" /></td>
+            </tr>
+            <tr>
+                <th>수학</th>
+                <td><input type="text" name="math" value="{{sungjuk.math}}" /></td>
+            </tr>
+        </form>
+    </table>
+    <table width="200" border="1" cellspacing="0" cellpadding="0" >
+        <tr>
+            <td><input type="submit" value="수정" onclick="javascript:writeCheck();" /></td>
+            <td><input type="submit" value="목록" onclick="javascript:goList();" /></td>
+        </tr>
+    </table>
+</body>
+</html>

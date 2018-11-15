@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">
+<link rel='stylesheet' href='header.css' /> 
+<script src="../jquery-3.3.1.js"></script>
+<script>
+	$(document).ready(function(){
+	 	var width = $('[data-role="slider"]').attr('data-width');
+	 	var height = $('[data-role="slider"]').attr('data-hegith');
+	 	var count = $('[data-role="slider"] div.item').length;
+	 	
+	 	$('[data-role="slider"]').css({
+	 		position: 'relative',
+	 		overflow: 'hidden',
+	 		width: width,
+	 		height: height
+	 	}).find('container').css({
+	 		position: 'absolute',
+	 		width: width*count,
+	 		overflow: 'hidden'
+	 	}).find('#item').css({
+	 		width: width,
+	 		height: height,
+	 		float: left; 
+	 	});
+	 	
+	 	var currentPage = 0;
+	 	var changePage = function(){
+	 		$('[data-role="slider"] > .container').animate({
+	 			left: -currentPage*width;
+	 		}, 500);
+	 	};
+	 	
+	 	$('left-button').click({
+	 		if(currentPage>0){
+	 			currentPage = currentPage-1;
+	 			changePage();
+	 		}
+	 	});
+	 	
+	 	$('right-button').click({
+	 		if(currentPage<count-1)
+	 			currentPage = currentPage+1;
+	 			changePage();
+	 	});
+	});
+
+</script>
+<style>
+	a{
+		text-decoration: none;
+	}
+	#intro{
+		float: left;
+		height: 150px;
+		margin-left: 20px;
+		margin-top: 20px;
+		font-size: 25px;
+		border-spacing: 10px;
+	}
+	#poster{
+		float: right;
+		margin-right: 10px;
+		height: 400px;
+	}
+	#trailer{
+		float:left;
+		width: 100%;
+	}
+	#trailer h1{
+		margin-left: 20px;
+	}
+</style>
+</head>
+<body>
+<header>
+<div>소개</div>
+<div>&nbsp;&nbsp;Little Forest, 2018</div>
+</header>
+<table id='intro'>
+	<tr>
+		<th>개 요</th>
+		<td>드라마 | 한국</td>
+		<td>103분</td>
+		<td>2018.02.28 개봉</td>
+	</tr>
+	<tr>
+		<th>감 독</th>
+		<td colspan='3'>임순례</td>
+	</tr>
+	<tr>
+		<th>출 연</th>
+		<td colspan='3'>
+		<a href="#">김태리(혜원)&nbsp;&nbsp;</a>
+		<a href="#">류준열(재하)&nbsp;&nbsp;</a>
+		<a href="#">진기주(은숙)&nbsp;&nbsp;</a>
+		</td>
+	</tr>
+	<tr>
+		<th>원작자</th>
+		<td colspan='3'>다이스케 이가라시</td>
+	</tr>
+	<tr>
+		<th>각 본</th>
+		<td colspan='3'>황성구</td>
+	</tr>
+	<tr>
+		<th>등 급</th>
+		<td colspan='3'>[국내]&nbsp;&nbsp;전체관람가</td>
+	</tr>
+	<tr>
+		<th>제작자</th>
+		<td colspan='3'>제나 쿠</td>
+	</tr>
+	<tr>
+		<th>배급사</th>
+		<td colspan='3'>메가박스</td>
+	</tr>	
+</table>
+<img src='https://movie-phinf.pstatic.net/20180130_167/1517289346533DfzLE_JPEG/movie_image.jpg?type=m886_590_2' 
+ id='poster' />
+<div id='trailer'>
+<br />
+<hr />
+<h1>예고편</h1>
+<p align='middle'><iframe width="560" height="315" src="https://www.youtube.com/embed/IWpBGln6bNk" frameborder="0" 
+allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
+</div>
+</body>
+</html>

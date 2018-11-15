@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+      
+      
+      
+      
+<mapper namespace="com.spring.naonnaTest.notice.NoticeMapper">
+
+ <resultMap type="NoticeVO" id="NoticeResultMap">
+    <result property="title"  column="TITLE"/>
+    <result property="contents" column="CONTENTS"/>
+    <result property="writer"  column="WRITER"/>
+    <result property="write_date" column="WRITE_DATE"/>
+ 
+ </resultMap>
+
+
+<insert id="addwrite" parameterType="com.spring.naonnaTest.notice.NoticeVO">
+   insert into notice values (#{title},#{contents},#{writer},sysdate)
+</insert>
+
+<select id="noticelistget" resultMap="NoticeResultMap">
+   select * from notice order by sysdate
+</select>
+
+<select id="noticedetail" parameterType="String" resultMap="NoticeResultMap">
+   select * from notice where title = #{title}
+</select>
+
+ <delete id="removeNotice" parameterType="String">
+   delete from notice where title = #{title}
+</delete>
+
+
+</mapper>      

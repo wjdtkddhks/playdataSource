@@ -1,0 +1,15 @@
+{
+  "student": [
+    {"name": "Dominica",
+    "score": {"kor":10, "eng":20, "math":30}
+    },
+    {
+      "name": "Dominico",
+      "score": {"kor":90, "eng":40, "math": 100}
+    },
+    {
+      "name": "Ruse",
+      "score": {"kor":90, "eng":90, "math":90}
+    }
+  ]
+}

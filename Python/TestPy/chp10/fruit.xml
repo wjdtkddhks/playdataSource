@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<viand>
+    <origin name="korean">
+        <quantity>10</quantity>
+        <price type="unit">1500</price>
+        <basket classfication="fruit" name="apple"/>
+        <basket classfication="vegetable" name="eggplant"/>
+    </origin>
+    <origin name="Singapore">
+        <quantity>3</quantity>
+        <price type="unit">950</price>
+        <basket classfication="fruit" name="banana"/>
+        <basket classfication="vegetable" name="cabbage"/>
+    </origin>
+    <origin name="Andes">
+        <quantity>5</quantity>
+        <price type="unit">1000</price>
+        <basket classfication="fruit" name="tomato"/>
+        <basket classfication="vegetable" name="leak"/>
+    </origin>
+</viand>

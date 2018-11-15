@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">
+<link rel='stylesheet' href='header.css' />
+<script src="../jquery-3.3.1.js"></script>
+<script>
+	$(function(){
+		$('#selboxDirect').hide();
+	
+		$('#email2').change(function(){
+			if($('#email2').val() == 'direct'){
+				$('#selboxDirect').show();
+			}else
+				$('#selboxDirect').hide();
+		});
+	});
+	
+	function check(){
+		var email1 = $('#email1').val();
+		if(email1.length == 0){
+			alert("이메일 앞부분을 입력해주세요.");
+			document.form1.email1.focus();
+			return false;
+		}
+		for(var i=0; i<email1.length; i++){
+			var echr = email1.charAt(i);
+			if(echr == '@'){
+				alert("이메일 앞부분을 확인해주세요.");
+				document.form1.email1.focus();
+				return false;
+			}
+		}
+		//email 앞부분 체크 끝!
+		
+		var email2 = $('#email2').val();
+		if(email2.length == 0){
+			alert("이메일 뒷부분을 선택해주세요.");
+			document.form1.email2.focus();
+			return false;
+		}
+		//email 뒷부분 체크 끝!
+		
+		var j=0;
+		for(var i=0; i<document.form1.grade.length; i++){
+			
+			if(document.form1.grade[i].checked == true){
+				j++;
+			}
+		}
+		if(j==0){
+			alert("추천지수를 체크해주세요.");
+			document.form1.grade[0].focus();
+			return false;
+		}
+		//추천지수 체크 끝!
+		
+		var pw = $('#pw').val();
+		if(pw.length < 4 || pw.length > 8){
+			alert("비밀번호 입력갯수를 확인해주세요.");
+			document.form1.pw.focus();
+			return false;
+		}
+		for(var i=0; i<pw.length; i++){
+			var pwchr = pw.charAt(i);
+			if(pwchr < '0' || pwchr > '9'){
+				alert("비밀번호는 숫자로만 입력해주세요.");
+				document.form1.pw.focus();
+				return false;	
+			}
+		}
+		//패스워드 체크 끝!
+		var textArea = document.form1.appr.value;
+		if(textArea.length == 0){
+			alert("감상평을 입력해주세요.");
+			document.form1.appr.focus();
+			return false;
+		}//감상평 체크 끝!
+		
+		return true;
+	}
+	
+	
+</script>
+<style>
+	table{
+		font-size: 25px;
+		margin: 20px auto;
+		border: 1px solid gray;
+	}
+	table tr th{
+		width: 80px;
+		color: white;
+		background-color : #e8503a;		
+	}
+	table tr td{
+		font-size: 20px;
+	}
+	select{
+		font-size: 18px;
+		border: 1px solid #7b8f5e;
+		width: 180px;
+	}
+</style>
+</head>
+<body>
+<header>
+<div>감 상 평</div>
+<div>&nbsp;&nbsp;Little Forest, 2018</div>
+</header>
+<form name='form1' action='#' onsubmit='return check();'>
+<table>
+	<tr>
+		<th>이메일</th>
+		<td>&nbsp;<input type="text" id='email1' name='email1' autofocus/> <font size=5>@</font> 
+		<input type='text' id='selboxDirect' name='selboxDirect' />
+		<select id='email2' name='email2'>
+			<option value="">--메 일 선 택--</option>
+			<option value='naver'>naver.com</option>
+			<option value='hanmail'>hanmail.net</option>
+			<option value='gmail'>gmail.com</option>
+			<option value='direct'>--직 접 입 력--</option>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<th>비밀번호</th>
+		<td>&nbsp;<input type="password" id='pw' name='pw' maxlength='8' /> (최소 4자리에서 8자리이하 숫자로 입력해주세요.)</td>
+	</tr>
+	<tr>
+		<th>추천지수</th>
+		<td>&nbsp;<input type="checkbox" name='grade' value='best'/> 최고
+		<input type="checkbox" name='grade' value='good'/> 추천
+		<input type="checkbox" name='grade' value='normal'/> 보통
+		<input type="checkbox" name='grade' value='bad' /> 비추천
+		<input type="checkbox" name='grade' value='worst' /> 최악</td>
+	</tr>
+	<tr>
+	<th>감상평</th>
+	<td>&nbsp;<textarea name='appr' cols='65' rows='20' placeholder='멋진 감상평을 적어주세요 ^^'></textarea></td>
+	<tr><th colspan='2'><input type='submit' value='작성' />&nbsp;&nbsp;<input type='reset' value='취소' /></th></tr>	
+</table>
+</form>
+</body>
+</html>

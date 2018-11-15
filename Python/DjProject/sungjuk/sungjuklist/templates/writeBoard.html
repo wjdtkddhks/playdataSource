@@ -1,0 +1,92 @@
+<script language="JavaScript">
+    function writeCheck(){
+        var form = document.writeform;
+
+        if(!form.hakbun.value){
+            alert('학번을 적어주세요!')
+            form.hakbun.focus();
+            return;
+        }
+
+        if(!form.name.value){
+            alert('이름을 적어주세요');
+            form.name.focus();
+            return;
+        }
+
+        if(!form.kor.value){
+            alert('국어점수를 적어주세요');
+            form.kor.focus();
+            return;
+        }
+
+        if(!form.eng.value){
+            alert('영어점수를 적어주세요');
+            form.eng.focus();
+            return;
+        }
+
+        if(!form.math.value){
+            alert('수학점수를 적어주세요');
+            form.math.focus();
+            return;
+        }
+
+       form.submit();
+    }
+</script>
+
+<!--
+참고 장고 1.2버전부터 post로 값을 보내면 이런 에러가 나오는 경우가 있는데,
+CSRF 보안 때문에 추가.
+
+해결방법은 post form뒤에 {% csrf_token %}을 넣어주면 된다.
+ex) <form action="" method="post">
+
+또는
+
+csrf보안 처리가 안된 python code 안에 [from django.views.decorators.csrf import csrf_exempt]를 임포트하고 @csrf_exempt로 데코레이션 한다.
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>성적 입력</title>
+    <style>
+        table{
+            margin: auto;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <table width="200" border="1" cellspacing="0" cellpadding="0">
+        <form name="writeform" method="post" action="/writeBoard/">
+            <tr>
+                <th>학번</th>
+                <td><input type="text" name="hakbun" maxlength="30"></td>
+            </tr>
+            <tr>
+                <th>이름</th>
+                <td><input type="text" name="name" maxlength="30"></td>
+            </tr>
+            <tr>
+                <th>국어</th>
+                <td><input type="text" name="kor" maxlength="30"></td>
+            </tr>
+            <tr>
+                <th>영어</th>
+                <td><input type="text" name="eng" maxlength="30"></td>
+            </tr>
+            <tr>
+                <th>수학</th>
+                <td><input type="text" name="math" maxlength="30"></td>
+            </tr>
+        </form>
+    </table>
+    <table width="200" border="1" cellspacing="0" cellpadding="0">
+        <tr>
+            <td><input type="submit" value="등록" onclick="javascript:writeCheck();" /></td>
+        </tr>
+    </table>
+</body>
+</html>

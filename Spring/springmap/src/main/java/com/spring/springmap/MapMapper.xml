@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	
+<mapper namespace="com.spring.springmap.MapMapper">
+
+	<!-- id는 MemberMapper.java에 동일하게 사용해야 한다 -->
+	
+	<resultMap type="java.util.HashMap" id="testMap">
+		<result property="pboard_taste" column="pboard_taste" />
+		<result property="pboard_price" column="pboard_price" />
+		<result property="pboard_service" column="pboard_service" />
+	</resultMap>
+	
+	<select id="getMapList" resultType="com.spring.springmap.MapVO">
+		select * from map_board
+	</select>
+	
+	<select id="getAvg" resultMap="testMap">
+		select avg(pboard_taste), avg(pboard_price), avg(pboard_service) from test_hotplace where place_num = 1
+	</select>
+	
+</mapper>

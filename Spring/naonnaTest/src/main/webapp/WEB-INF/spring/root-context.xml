@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   
+   <!-- Root Context: defines shared resources visible to all other web components -->
+      <!-- 뷰(jsp)와 관련없는 빈 설정에 사용. servlet-context.xml 은 뷰와 관련된 빈설정에 사용 -->
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+      <property name="driverClass" value="oracle.jdbc.OracleDriver"></property>
+      <!-- 아래의 부분은 오라클 버전이나 계정에 맞춰 적는다 -->
+      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+      <property name="username" value="hr"></property>
+      <property name="password" value="123456"></property>
+   </bean>
+   
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource"></property>
+      <!-- 이 부분은 편집!! -->
+      <property name="typeAliasesPackage" value="com.spring.naonnaTest"></property>
+      <!-- <property name="mapperLocations" value="classpath:/com/spring/springajax/MemberMapper.xml"></property> -->
+      <!-- 이 부분은 편집!! -->
+      <property name="mapperLocations" value="classpath:/com/spring/naonnaTest/**/*.xml"></property>
+   </bean>
+   
+   <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg ref="sqlSessionFactory"></constructor-arg>
+   </bean>
+   
+</beans>

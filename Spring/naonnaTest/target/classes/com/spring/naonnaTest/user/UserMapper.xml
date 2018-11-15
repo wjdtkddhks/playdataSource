@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.naonnaTest.user.UserMapper">
+
+   <resultMap type="UserVO" id="UserResultMap">
+      <result property="nickname" column="nickname"/>
+      <result property="teamName" column="team_name"/>
+      <result property="age" column="age"/>
+      <result property="gender" column="gender"/>
+      <result property="position" column="position"/>
+      <result property="email" column="email"/>
+      <result property="cap" column="cap"/>
+      <result property="forPerson" column="forPerson"/>
+      <result property="city" column="city"/>
+      <result property="userPhoto" column="user_photo"/>
+   </resultMap>
+ 
+ 	<!--  id는 Mapper.java(여기서 GroundMapper.java)에 동일하게 사용해야된다.  -->
+
+   <select id ="getUserInfo" parameterType="String" resultMap="UserResultMap">
+      SELECT * FROM user_info where forPerson = trim(#{forPerson, javaType=String})
+   </select>
+   
+   <select id ="myUserInfo" parameterType="String" resultMap="UserResultMap">
+      SELECT * FROM user_info where nickname = trim(#{nickname, javaType=String})
+   </select>
+
+   
+   <insert id ="insertUserInfo" parameterType="com.spring.naonnaTest.user.UserVO">
+      insert into user_info (nickname, age, gender, email, forPerson, city) values (#{nickname, javaType=String}, #{age, javaType=int}, #{gender}, #{email}, trim(#{forPerson}), #{city})
+   </insert>
+   
+   <update id ="updateInfo" parameterType="com.spring.naonnaTest.user.UserVO">
+      update user_info set age = #{age}, city = #{city}, position = #{position}, email = #{email} where nickname = #{nickname}
+   </update>
+   
+   <update id ="updateProfile" parameterType="com.spring.naonnaTest.user.UserVO">
+      update user_info set user_photo = #{userPhoto} where nickname = #{nickname}
+   </update>
+   
+	<select id="getUserNick" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM user_info WHERE nickname = #{nickname}
+    </select>
+    
+    <update id="teamDraw" parameterType="String">
+      update user_info set team_name ='' where nickname = #{nickname}
+    </update>
+    
+    <delete id="teamMemdelete" parameterType="String">
+       delete from team_member where nickname =#{nickname}
+    </delete>
+    
+    <update id="minTeamMem" parameterType="hashmap">
+      update team set number_team = number_team - 1 where team_name=#{team_name}
+    </update>
+   
+</mapper>
+   

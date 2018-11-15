@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="http://fonts.googleapis.com/earlyaccess/nanumpenscript.css" rel="stylesheet">
+<link rel='stylesheet' href='header.css' /> 
+<link rel="stylesheet" href="jquery.lightbox.css" />
+<script src="../jquery-3.3.1.js"></script>
+<script src="jquery.lightbox.js"></script>
+<script>
+	$(document).ready(function(){
+	 	var width = $('[data-role="slider"]').attr('data-width');
+	 	var height = $('[data-role="slider"]').attr('data-hegith');
+	 	var count = $('[data-role="slider"] div.item').length;
+	 	
+	 	$('[data-role="slider"]').css({
+	 		position: 'relative',
+	 		overflow: 'hidden',
+	 		width: width,
+	 		height: height
+	 	}).find('container').css({
+	 		position: 'absolute',
+	 		width: width*count,
+	 		overflow: 'hidden'
+	 	}).find('#item').css({
+	 		width: width,
+	 		height: height,
+	 		float: left; 
+	 	});
+	 	
+	 	var currentPage = 0;
+	 	var changePage = function(){
+	 		$('[data-role="slider"] > .container').animate({
+	 			left: -currentPage*width;
+	 		}, 500);
+	 	};
+	 	
+	 	$('left-button').click({
+	 		if(currentPage>0){
+	 			currentPage = currentPage-1;
+	 			changePage();
+	 		}
+	 	});
+	 	
+	 	$('right-button').click({
+	 		if(currentPage<count-1)
+	 			currentPage = currentPage+1;
+	 			changePage();
+	 	});
+	});
+
+</script>
+<style>
+	a{
+		text-decoration: none;
+	}
+	#intro{
+		float: left;
+		height: 150px;
+		margin-left: 20px;
+		margin-top: 20px;
+		font-size: 25px;
+		border-spacing: 10px;
+	}
+	#poster{
+		float: right;
+		margin-right: 10px;
+		height: 400px;
+	}
+	#trailer{
+		float:left;
+		width: 100%;
+	}
+	#trailer h1{
+		margin-left: 20px;
+	}
+</style>
+</head>
+<body>
+<header>
+<div>소개(원작)</div>
+<div>&nbsp;&nbsp;Little Forest, 2015</div>
+</header>
+<table id='intro'>
+	<tr>
+		<th>개 요</th>
+		<td>드라마 | 일본</td>
+		<td>111분(여름,가을편) 120분(겨울,봄편)</td>
+		<td>2015.02.12 개봉</td>
+	</tr>
+	<tr>
+		<th>감 독</th>
+		<td colspan='3'>모리 준이치</td>
+	</tr>
+	<tr>
+		<th>출 연</th>
+		<td colspan='3'>
+		<a href="#">하시모토 아이(이치코)&nbsp;&nbsp;</a>
+		<a href="#">미우라 타카히로(유우타)&nbsp;&nbsp;</a>
+		<a href="#">마츠오카 마유(키코)&nbsp;&nbsp;</a>
+		</td>
+	</tr>
+	<tr>
+		<th>원작자</th>
+		<td colspan='3'>모리 준이치</td>
+	</tr>
+	<tr>
+		<th>각 본</th>
+		<td colspan='3'>황성구</td>
+	</tr>
+	<tr>
+		<th>등 급</th>
+		<td colspan='3'>[국내]&nbsp;&nbsp;12세관람가</td>
+	</tr>
+	<tr>
+		<th>제작사</th>
+		<td colspan='3'>로봇</td>
+	</tr>
+	<tr>
+		<th>배급사</th>
+		<td colspan='3'>(주)영화사 진진</td>
+	</tr>	
+</table>
+<img src='https://movie-phinf.pstatic.net/20150114_206/1421200132061BpI2D_JPEG/movie_image.jpg?type=m665_443_2' 
+ id='poster' />
+<div id='trailer'>
+<br />
+<hr />
+<h1>예고편</h1>
+<p align='middle'><iframe width="560" height="315" src="https://www.youtube.com/embed/5fcDvt6jtEA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
+</div>
+
+
+
+<!-- <hr />
+<div data-role='slider' data-width='500px' data-height='700px'>
+	<div class='container'>
+		<div class='item'><img src='https://movie-phinf.pstatic.net/20180219_231/151902706368618Apn_JPEG/movie_image.jpg?type=m886_590_2' /></div>
+		<div class='item'><img src='https://movie-phinf.pstatic.net/20180130_285/15172900845062rc0X_JPEG/movie_image.jpg?type=m886_590_2' /></div> 	
+		<div class='item'><img src='https://movie-phinf.pstatic.net/20180130_245/1517290085085Ll5i0_JPEG/movie_image.jpg?type=m886_590_2' /></div>
+		<div class='item'><img src='https://movie-phinf.pstatic.net/20180130_97/1517290085666Y6xkS_JPEG/movie_image.jpg?type=m886_590_2' /></div>
+		<div class='item'><img src='https://movie-phinf.pstatic.net/20180130_33/1517290086015Xbxgk_JPEG/movie_image.jpg?type=m886_590_2' /></div>
+		<div class='item'><img src='https://movie-phinf.pstatic.net/20180130_87/1517290087408Gi6Ya_JPEG/movie_image.jpg?type=m886_590_2' /></div>
+		<div class='item'><img src='https://movie-phinf.pstatic.net/20180130_196/1517290087631X1AOw_JPEG/movie_image.jpg?type=m886_590_2' /></div>
+		<div class='item'><img src='https://movie-phinf.pstatic.net/20180312_227/1520818487916BFNyv_JPEG/movie_image.jpg?type=m886_590_2' /></div>
+	</div>
+</div>
+	<button id="left-button">left</button>
+	<button id="right-button">right</button> -->
+
+</body>
+</html>

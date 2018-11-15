@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    
+ <mapper namespace="com.spring.naonnaTest.admin.AdminMapper">
+ 
+  <resultMap type="AdminVO" id="AdminResultMap">
+  	<result property="ground_admin" column="GROUND_ADMIN"/>
+  	<result property="ground_ad_pw" column="GROUND_AD_PW"/>
+  	<result property="ground_ad_pin" column="GROUND_AD_PIN"/>
+  	<result property="ground_name" column="GROUND_NAME"/>
+
+  </resultMap>
+ 
+ 
+ <insert id="insertAdmin" parameterType="com.spring.naonnaTest.admin.AdminVO">
+ insert into ground_manager values (#{ground_admin},#{ground_ad_pw},#{ground_ad_pin},#{ground_name})
+ 
+ </insert>
+ 
+ <select id="userCheck" resultType="String">
+ select ground_ad_pw from ground_manager where ground_admin = #{ground_admin}
+ </select>
+ 
+ <select id="getAdminInfo"  resultType="com.spring.naonnaTest.admin.AdminVO">
+ select * from ground_manager where ground_admin = #{ground_admin}
+  </select>
+  
+ <select id="isAdmin" resultType="String">
+ 	select ground_ad_pin from ground_manager where ground_admin=#{ground_admin}
+ </select> 
+ 
+ <select id="getAdminId" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM ground_manager WHERE ground_admin = #{ground_admin}
+          
+</select>
+ 
+ 
+ 
+ </mapper>
+ 

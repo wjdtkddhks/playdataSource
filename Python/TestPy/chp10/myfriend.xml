@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<friends>
+    <address>
+        <name>Lee</name>
+        <addr>seoul</addr>
+    </address>
+    <address>
+        <name>Dominico</name>
+        <addr>torento</addr>
+    </address>
+    <address>
+        <name>Ruri</name>
+        <addr>paris</addr>
+    </address>
+    <address>
+        <name>Ruso</name>
+        <addr>london</addr>
+    </address>
+</friends>
