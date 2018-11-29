@@ -20,7 +20,7 @@ public class MainForAssembler {
 		
 //		ctx = new GenericXmlApplicationContext("classpath:appCtx.xml");
 //		ctx = new GenericXmlApplicationContext("classpath:conf1.xml", "classpath:conf2.xml");
-		ctx = new GenericXmlApplicationContext("classpath:appCtx1.xml");
+		ctx = new GenericXmlApplicationContext("classpath:appCtx2.xml");
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
