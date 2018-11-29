@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="spring.RegisterRequest"/>
+<fullyQualifiedTypeName name="spring.AlreadyExistingMemberException"/>
+<fullyQualifiedTypeName name="spring.MemberNotFoundException"/>
+<fullyQualifiedTypeName name="spring.IdPasswordNotMatchingException"/>
+<fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
+<fullyQualifiedTypeName name="spring.MemberListPrinter"/>
+<fullyQualifiedTypeName name="spring.MemberInfoPrinter"/>
+<fullyQualifiedTypeName name="spring.VersionPrinter"/>
+</qualifiedTypeNameHistroy>
