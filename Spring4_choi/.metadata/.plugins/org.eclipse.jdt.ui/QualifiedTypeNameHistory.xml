@@ -8,8 +8,17 @@
 <fullyQualifiedTypeName name="spring.MemberNotFoundException"/>
 <fullyQualifiedTypeName name="spring.IdPasswordNotMatchingException"/>
 <fullyQualifiedTypeName name="org.springframework.context.ApplicationContext"/>
-<fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
 <fullyQualifiedTypeName name="spring.MemberListPrinter"/>
-<fullyQualifiedTypeName name="spring.MemberInfoPrinter"/>
 <fullyQualifiedTypeName name="spring.VersionPrinter"/>
+<fullyQualifiedTypeName name="javax.annotation.Resource"/>
+<fullyQualifiedTypeName name="spring.MemberInfoPrinter"/>
+<fullyQualifiedTypeName name="spring.MemberDao"/>
+<fullyQualifiedTypeName name="config.ConfigPart1"/>
+<fullyQualifiedTypeName name="config.ConfigPart2"/>
+<fullyQualifiedTypeName name="config.ConfigPartMain"/>
+<fullyQualifiedTypeName name="spring.MemberRegisterService"/>
+<fullyQualifiedTypeName name="config.JavaMainConf"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.AnnotationConfigApplicationContext"/>
+<fullyQualifiedTypeName name="config.JavaConfig"/>
 </qualifiedTypeNameHistroy>

@@ -14,6 +14,9 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\git\play\Spring4_choi\sp4-chap07"/>
+			<item value="C:\git\play\Spring4_choi\sp4-chap06"/>
+			<item value="C:\git\play\Spring4_choi\sp4-chap05"/>
 			<item value="C:\BigDeep\Eclipse_Spring_Source\sp4-chap04"/>
 			<item value="C:\BigDeep\Eclipse_Spring_Source\sp4-chap03"/>
 			<item value="C:\BigDeep\Eclipse_Spring_Source\sp4-chap02"/>
