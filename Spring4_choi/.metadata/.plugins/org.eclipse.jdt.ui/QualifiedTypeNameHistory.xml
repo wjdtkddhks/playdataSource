@@ -21,4 +21,13 @@
 <fullyQualifiedTypeName name="org.springframework.context.support.GenericXmlApplicationContext"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.AnnotationConfigApplicationContext"/>
 <fullyQualifiedTypeName name="config.JavaConfig"/>
+<fullyQualifiedTypeName name="org.aspectj.lang.Signature"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="chap07.RecCalculator"/>
+<fullyQualifiedTypeName name="chap07.Calculator"/>
+<fullyQualifiedTypeName name="org.aopalliance.intercept.Joinpoint"/>
+<fullyQualifiedTypeName name="javax.sql.DataSource"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.RowMapper"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 </qualifiedTypeNameHistroy>
