@@ -10,6 +10,8 @@ public class ChangePasswordService {
 		this.memberDao = memberDao;
 	}
 	
+	
+//	@Transactional(rollbackFor = {SQLException.class, IOException.class}) // 두개의 Exception이 일어나면 rollback 
 	@Transactional
 	public void changePassword(String email, String oldPwd, String newPwd) {
 		Member member = memberDao.selectByEmail(email);
@@ -17,6 +19,8 @@ public class ChangePasswordService {
 			throw new MemberNotFoundException();
 		
 		member.changePassword(oldPwd, newPwd);
+		
+		memberDao.update(member);
 	}
 
 }
